@@ -10,6 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Scan-Fortschrittsbalken (oben am Viewport) ---------- */
+  const scanProgress = document.getElementById('scanProgress');
+  function updateScanProgress() {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    if (scanProgress) scanProgress.style.width = pct + '%';
+  }
+
   /* ---------- Header: Hintergrund nach Scroll ---------- */
   const header = document.getElementById('siteHeader');
   const onScroll = () => {
@@ -22,16 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-
-  /* ---------- Scan-Fortschrittsbalken (oben am Viewport) ---------- */
-  const scanProgress = document.getElementById('scanProgress');
-  function updateScanProgress() {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop;
-    const scrollHeight = doc.scrollHeight - doc.clientHeight;
-    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-    if (scanProgress) scanProgress.style.width = pct + '%';
-  }
 
   /* ---------- Mobiles Menü ---------- */
   const navToggle = document.getElementById('navToggle');
@@ -129,6 +129,19 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   if (kontaktForm) {
+    // Sicherheitsnetz: Falls der Browser das Formular doch einmal nativ
+    // abschickt (z. B. weil JavaScript kurzzeitig nicht reagiert hat)
+    // und der Nutzer danach über "Zurück" auf die Seite kommt, zeigt
+    // der Browser oft den zwischengespeicherten, noch ausgefüllten
+    // Stand. Wir merken uns deshalb einen erfolgreichen Versand in
+    // sessionStorage und leeren das Formular beim Laden der Seite,
+    // falls dieser Zustand gesetzt ist.
+    if (sessionStorage.getItem('evaceyeFormSent') === '1') {
+      kontaktForm.reset();
+      kontaktForm.rolle.selectedIndex = 0;
+      sessionStorage.removeItem('evaceyeFormSent');
+    }
+
     kontaktForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -174,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
           kontaktForm._replyto.value = '';
           kontaktForm.rolle.selectedIndex = 0;
           kontaktForm.message.value = '';
+          sessionStorage.setItem('evaceyeFormSent', '1');
         } else {
           throw new Error('Formspree hat die Anfrage abgelehnt.');
         }
