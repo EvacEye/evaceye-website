@@ -657,6 +657,14 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-mono);
 }
 .info-block p { color: var(--ink); font-size: 0.96rem; line-height: 1.6; }
+.email-link {
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--signal-occupied);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.email-link:hover { color: var(--signal-occupied); }
 
 /* ---------- Footer ---------- */
 .site-footer {

@@ -1,7 +1,7 @@
 /* =========================================================
    EvacEye — Interaktionen
    Header-Status, mobiles Menü, Scroll-Reveal, Scan-Fortschrittsbalken,
-   einfache Kontaktformular-Validierung (kein Backend angebunden).
+   Kontaktformular mit automatischem Versand über Formspree.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,21 +106,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ----------------------------------------------------------------
      Kontaktformular
-     Hinweis: Es ist aktuell kein Backend / Mail-Versand angebunden.
-     Diese Funktion validiert nur clientseitig und zeigt eine
-     Bestätigung an. Für echten Versand z. B. Formspree, Netlify
-     Forms oder eine eigene API ergänzen (siehe Kommentar unten).
+     GitHub Pages liefert nur statische Dateien aus, es gibt also
+     keinen eigenen Server, der E-Mails verschicken könnte. Der
+     Versand läuft deshalb über Formspree (https://formspree.io) —
+     das Formular wird per fetch() im Hintergrund an Formspree
+     gesendet, Formspree leitet die Nachricht dann automatisch als
+     E-Mail an evaceye@hs-schmalkalden.de weiter. Der Besucher merkt
+     davon nichts außer der Bestätigung auf der Seite.
   ---------------------------------------------------------------- */
   const kontaktForm = document.getElementById('kontaktForm');
   const formNote = document.getElementById('formNote');
+  const formSubmitBtn = document.getElementById('formSubmitBtn');
+  const formSubject = document.getElementById('formSubject');
+
+  const ROLLEN_LABEL = {
+    jury: 'Jury / COSIMA',
+    sponsor: 'Sponsor / Förderer',
+    hochschule: 'Hochschule / Forschung',
+    feuerwehr: 'Feuerwehr / Einsatzkraft',
+    kunde: 'Interessent / zukünftiger Kunde',
+    sonstiges: 'Sonstiges'
+  };
 
   if (kontaktForm) {
-    kontaktForm.addEventListener('submit', (event) => {
+    kontaktForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const name = kontaktForm.name.value.trim();
-      const email = kontaktForm.email.value.trim();
-      const nachricht = kontaktForm.nachricht.value.trim();
+      const email = kontaktForm._replyto.value.trim();
+      const rolleWert = kontaktForm.rolle.value;
+      const rolleText = ROLLEN_LABEL[rolleWert] || rolleWert;
+      const nachricht = kontaktForm.message.value.trim();
 
       if (!name || !email || !nachricht) {
         formNote.style.color = '#c0392b';
@@ -128,16 +144,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // ---- Hier echten Versand einbinden, z. B.: ----
-      // fetch('https://formspree.io/f/DEINE_ID', {
-      //   method: 'POST',
-      //   headers: { 'Accept': 'application/json' },
-      //   body: new FormData(kontaktForm)
-      // });
+      // Betreff mit der gewählten Rolle versehen, damit im Postfach
+      // sofort erkennbar ist, von wem die Anfrage kommt.
+      if (formSubject) {
+        formSubject.value = `Kontaktanfrage über die Website (${rolleText})`;
+      }
 
-      formNote.style.color = '#1f7a3d';
-      formNote.textContent = `Danke, ${name}! Deine Nachricht wurde erfasst — da diese Seite aktuell ohne Versanddienst läuft, melden wir uns nach Einrichtung des Formulars zurück.`;
-      kontaktForm.reset();
+      formSubmitBtn.disabled = true;
+      formSubmitBtn.textContent = 'Wird gesendet …';
+      formNote.style.color = 'rgba(11,19,32,0.65)';
+      formNote.textContent = '';
+
+      try {
+        const response = await fetch(kontaktForm.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(kontaktForm)
+        });
+
+        if (response.ok) {
+          formNote.style.color = '#1f7a3d';
+          formNote.textContent = `Danke, ${name}! Deine Nachricht wurde gesendet, wir melden uns so schnell wie möglich.`;
+          kontaktForm.reset();
+        } else {
+          throw new Error('Formspree hat die Anfrage abgelehnt.');
+        }
+      } catch (error) {
+        formNote.style.color = '#c0392b';
+        formNote.textContent = 'Senden hat nicht funktioniert. Bitte versuche es erneut oder schreibe direkt an evaceye@hs-schmalkalden.de.';
+      } finally {
+        formSubmitBtn.disabled = false;
+        formSubmitBtn.textContent = 'Nachricht senden';
+      }
     });
   }
 

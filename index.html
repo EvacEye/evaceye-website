@@ -305,14 +305,15 @@
       <p class="section-lead">Ob Jury, Sponsor, Hochschule, Feuerwehr oder zukünftiger Anwender — wir freuen uns über jede Nachricht.</p>
 
       <div class="kontakt-layout">
-        <form class="kontakt-form" id="kontaktForm" novalidate>
+        <form class="kontakt-form" id="kontaktForm" action="https://formspree.io/f/xnjkvlob" method="POST" novalidate>
+          <input type="hidden" name="_subject" id="formSubject" value="Kontaktanfrage über die EvacEye-Website">
           <div class="form-row">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required autocomplete="name">
           </div>
           <div class="form-row">
             <label for="email">E-Mail</label>
-            <input type="email" id="email" name="email" required autocomplete="email">
+            <input type="email" id="email" name="_replyto" required autocomplete="email">
           </div>
           <div class="form-row">
             <label for="rolle">Ich bin …</label>
@@ -327,13 +328,17 @@
           </div>
           <div class="form-row">
             <label for="nachricht">Nachricht</label>
-            <textarea id="nachricht" name="nachricht" rows="5" required></textarea>
+            <textarea id="nachricht" name="message" rows="5" required></textarea>
           </div>
-          <button type="submit" class="btn btn--primary btn--block">Nachricht senden</button>
+          <button type="submit" class="btn btn--primary btn--block" id="formSubmitBtn">Nachricht senden</button>
           <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
         </form>
 
         <div class="kontakt-info">
+          <div class="info-block">
+            <h3>E-Mail</h3>
+            <p><a href="mailto:evaceye@hs-schmalkalden.de" class="email-link">evaceye@hs-schmalkalden.de</a></p>
+          </div>
           <div class="info-block">
             <h3>Adresse</h3>
             <p>Hochschule Schmalkalden<br>Fakultät Elektrotechnik<br>Blechhammer 9<br>98574 Schmalkalden</p>
