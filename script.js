@@ -166,6 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
           formNote.style.color = '#1f7a3d';
           formNote.textContent = `Danke, ${name}! Deine Nachricht wurde gesendet, wir melden uns so schnell wie möglich.`;
           kontaktForm.reset();
+          // Zusätzlich jedes Feld einzeln zurücksetzen, da reset() das
+          // select-Feld in manchen Browsern nicht zuverlässig auf die
+          // erste Option zurückspringen lässt, wenn der Wert per
+          // JavaScript (formSubject) zuvor verändert wurde.
+          kontaktForm.name.value = '';
+          kontaktForm._replyto.value = '';
+          kontaktForm.rolle.selectedIndex = 0;
+          kontaktForm.message.value = '';
         } else {
           throw new Error('Formspree hat die Anfrage abgelehnt.');
         }
