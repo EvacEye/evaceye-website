@@ -1,1 +1,365 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EvacEye — Sensorbasierte Personenerkennung im Brandfall</title>
+<meta name="description" content="EvacEye ist ein sensorbasiertes Assistenzsystem auf Radar- und Thermalbasis, das Einsatzkräften im Brandfall in Echtzeit zeigt, in welchen Räumen sich noch Personen befinden — ohne Kamera, ohne Bilddaten.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="scan-progress" id="scanProgress" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#start" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="16" cy="16" r="4" fill="currentColor"/>
+        </svg>
+      </span>
+      EvacEye
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#problem"><span class="nav-index">01</span>Problem</a>
+      <a href="#loesung"><span class="nav-index">02</span>Lösung</a>
+      <a href="#technik"><span class="nav-index">03</span>Technik</a>
+      <a href="#team"><span class="nav-index">04</span>Team</a>
+      <a href="#kontakt"><span class="nav-index">05</span>Kontakt</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="start">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Startseite">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow"><span class="dot dot--occupied"></span>Projektarbeit · Wettbewerb COSIMA 2026</p>
+      <h1 class="hero-title">Im Rauch sehen,<br>wo Menschen sind.</h1>
+      <p class="hero-sub">EvacEye erkennt mit Radar- und Thermalsensorik, in welchen Räumen sich im Brandfall noch Personen befinden — ganz ohne Kamera, ohne Bildaufnahme, ohne Identifikation. Einsatzkräfte erhalten so in Sekunden statt Minuten eine verlässliche Lageübersicht.</p>
+      <div class="hero-actions">
+        <a href="#loesung" class="btn btn--primary">Funktionsweise ansehen</a>
+        <a href="#kontakt" class="btn btn--ghost">Mit dem Team sprechen</a>
+      </div>
+    </div>
+
+    <div class="hero-floorplan" role="img" aria-label="Schematische Live-Ansicht eines überwachten Geschosses mit vier Räumen: Erkannte Person, erkannte Person mit Hitzeentwicklung, kein Befund und Sensorausfall.">
+      <div class="floorplan-card">
+        <div class="floorplan-head">
+          <span class="floorplan-title">Geschoss 02 — Ostflügel</span>
+          <span class="floorplan-live"><span class="dot dot--occupied" id="liveDot"></span>Alarmbetrieb aktiv</span>
+        </div>
+        <div class="floorplan-grid">
+          <div class="room is-occupied" tabindex="0">
+            <span class="room-label">Raum 204</span>
+            <span class="room-icon" aria-hidden="true">●</span>
+            <span class="room-status">1 Person erkannt</span>
+          </div>
+          <div class="room is-hot" tabindex="0">
+            <span class="room-label">Raum 205</span>
+            <span class="room-icon room-icon--flame" aria-hidden="true">▲</span>
+            <span class="room-status">Person + erhöhte Temperatur</span>
+          </div>
+          <div class="room is-clear" tabindex="0">
+            <span class="room-label">Raum 206</span>
+            <span class="room-icon" aria-hidden="true">–</span>
+            <span class="room-status">Kein Befund</span>
+          </div>
+          <div class="room is-offline" tabindex="0">
+            <span class="room-label">Raum 207</span>
+            <span class="room-icon" aria-hidden="true">!</span>
+            <span class="room-status">Sensorausfall</span>
+          </div>
+        </div>
+        <div class="floorplan-legend">
+          <span><i class="legend-dot legend-dot--occupied"></i>Person erkannt</span>
+          <span><i class="legend-dot legend-dot--hot"></i>+ Hitze</span>
+          <span><i class="legend-dot legend-dot--clear"></i>Kein Befund</span>
+          <span><i class="legend-dot legend-dot--offline"></i>Sensorausfall</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="meta-item"><span class="meta-num">&lt;5s</span><span class="meta-label">bis zur Lageübersicht im Alarmfall</span></div>
+      <div class="meta-item"><span class="meta-num">0</span><span class="meta-label">Kameras, Bilddaten oder Identifikation</span></div>
+      <div class="meta-item"><span class="meta-num">2</span><span class="meta-label">unabhängige Übertragungswege je Sensor</span></div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="section section--problem" id="problem">
+    <div class="section-inner">
+      <p class="section-eyebrow"><span class="nav-index">01</span>Problemstellung</p>
+      <h2 class="section-title">Im Ernstfall zählt jede Sekunde — und jede Information fehlt.</h2>
+      <p class="section-lead">Brände in Gebäuden sind hochdynamisch und zeitkritisch. Rauch, Dunkelheit und Hitze erschweren die Lageerkundung erheblich. Zu Beginn eines Einsatzes ist oft unklar, ob und wo sich noch Personen befinden — Räume müssen manuell durchsucht werden. Das kostet Zeit und setzt Rettungskräfte wie Eingeschlossene zusätzlichen Risiken aus.</p>
+
+      <div class="problem-grid">
+        <article class="problem-card">
+          <h3>Brandmeldeanlagen</h3>
+          <p>Melden Rauch und Temperaturanstieg, aber keine Aussage darüber, ob sich noch Menschen im Raum aufhalten.</p>
+        </article>
+        <article class="problem-card">
+          <h3>Kamerasysteme</h3>
+          <p>Versagen bei Rauch und Dunkelheit optisch und werfen erhebliche datenschutzrechtliche Akzeptanzprobleme auf.</p>
+        </article>
+        <article class="problem-card">
+          <h3>Manuelle Suche</h3>
+          <p>Systematisches Durchsuchen jedes Raumes kostet wertvolle Zeit und erhöht das Risiko für Einsatzkräfte.</p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <p>Die zentrale Frage im Einsatz: <strong>In welchen Räumen befinden sich mit hoher Wahrscheinlichkeit noch Personen — und welche Bereiche sollten bei der Evakuierung priorisiert werden?</strong> Genau diese Lücke schließt EvacEye.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LÖSUNG ============ -->
+  <section class="section section--loesung" id="loesung">
+    <div class="section-inner">
+      <p class="section-eyebrow"><span class="nav-index">02</span>Lösung</p>
+      <h2 class="section-title">Eine Lageübersicht statt eines Rohdatenstroms.</h2>
+      <p class="section-lead">EvacEye verarbeitet Radar- und Thermaldaten direkt am Sensor und übergibt nur das, was im Einsatz zählt: eine klare, raumscharfe Zustandsinformation. Im Normalbetrieb arbeitet das System lautlos im Hintergrund — erst im Alarmfall übernimmt die Einsatzoberfläche.</p>
+
+      <div class="loesung-layout">
+        <div class="loesung-text">
+          <div class="feature-row">
+            <h3>Stockwerksnavigation</h3>
+            <p>Eine Übersicht aller Etagen zeigt sofort, welche Stockwerke noch Personen enthalten — markiert in Orange, lange bevor eine Etage überhaupt geöffnet wird.</p>
+          </div>
+          <div class="feature-row">
+            <h3>Raumscharfe Darstellung</h3>
+            <p>Jeder Raum erscheint an seiner tatsächlichen Position im Grundriss. Personenerkennung, Hitzeentwicklung und Sensorausfall werden über wenige, eindeutige Symbole kommuniziert — bewusst reduziert für die Informationsaufnahme unter Stress.</p>
+          </div>
+          <div class="feature-row">
+            <h3>Web &amp; mobil identisch</h3>
+            <p>Dieselbe Oberfläche läuft auf dem Leitstellen-Rechner und auf einem Tablet am Gebäudeeingang. Ein Bedienkonzept, keine Umgewöhnung im Einsatz.</p>
+          </div>
+          <div class="feature-row">
+            <h3>Nur Zustandsdaten, keine Bilder</h3>
+            <p>Pro Raum: Anwesenheit, Personenzahl, maximale und aktuelle Temperatur. Keine Rohdaten, keine Kamerabilder, keine Identifikation einzelner Personen.</p>
+          </div>
+        </div>
+
+        <div class="loesung-visual">
+          <div class="room-detail-card">
+            <span class="room-detail-eyebrow">Rauminformationen — Raum 205</span>
+            <ul class="room-detail-list">
+              <li><span>Erkannte Personen</span><strong>1</strong></li>
+              <li><span>Maximale Temperatur</span><strong>61 °C</strong></li>
+              <li><span>Umgebungstemperatur</span><strong>34 °C</strong></li>
+              <li><span>Status</span><strong class="status-flag">Priorität: hoch</strong></li>
+            </ul>
+            <p class="room-detail-note">Entscheidungshilfe, keine Ersatzkontrolle — die finale Freigabe jedes Bereichs bleibt bei den Einsatzkräften vor Ort.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TECHNIK ============ -->
+  <section class="section section--technik" id="technik">
+    <div class="section-inner">
+      <p class="section-eyebrow"><span class="nav-index">03</span>Technik</p>
+      <h2 class="section-title">Vom Sensorknoten bis zur Lageübersicht.</h2>
+      <p class="section-lead">Jeder Raum wird durch einen eigenständigen Sensorknoten überwacht. Die Verarbeitung läuft mehrstufig — von der Rohsignalerfassung bis zur fertigen Zustandsinformation, die im Gebäudenetz ankommt.</p>
+
+      <div class="pipeline" role="list">
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">▤</span>
+          <h3>Erfassung</h3>
+          <p>mmWave-Radar erkennt Bewegung, Entfernung und selbst feinste Mikrobewegungen wie Atmung — auch bei Rauch oder Dunkelheit. Ein Thermalsensor erfasst parallel die Wärmeverteilung im Raum.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">∿</span>
+          <h3>Vorverarbeitung</h3>
+          <p>Ein Raspberry Zero 2W filtert und glättet die Rohdaten direkt am Sensorknoten, um Messrauschen und kurzzeitige Fehlmessungen zu reduzieren.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">⬡</span>
+          <h3>Sensordatenfusion</h3>
+          <p>Bewegungs- und Wärmemuster werden zeitlich und räumlich abgeglichen. Anwesenheit wird nur erkannt, wenn beide Sensorspuren plausibel zusammenpassen — das reduziert Fehlinterpretationen.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">⇄</span>
+          <h3>Übertragung</h3>
+          <p>Zustandsdaten gehen per WLAN an die Servereinheit. Ein zweiter, unabhängiger LoRaWAN-Meshweg an Server und mobiles Endgerät sichert die Funktion auch bei Strom- oder WLAN-Ausfall.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">▣</span>
+          <h3>Lageübersicht</h3>
+          <p>Server und mobiles Endgerät führen alle Räume zur gebäudeweiten Echtzeit-Ansicht zusammen — identisch auf Web und Tablet.</p>
+        </div>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-card">
+          <h4>Sensorknoten</h4>
+          <ul>
+            <li>mmWave-Radarsensor</li>
+            <li>Niedrig aufgelöste Infrarot-Thermalmatrix</li>
+            <li>Raspberry Zero 2W als Recheneinheit</li>
+            <li>Akku als Notstromversorgung</li>
+            <li>LoRaWAN-Mesh-Modul</li>
+            <li>Versorgung über PoE im Normalbetrieb</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>Betriebsmodi</h4>
+          <ul>
+            <li>Reduzierter Überwachungsmodus im Normalbetrieb</li>
+            <li>Zyklische Statusmeldung zur Energieeinsparung</li>
+            <li>Vollbetrieb ab Alarmauslösung der BMA</li>
+            <li>Echtzeit-Datenstrom im Alarmfall</li>
+            <li>Manuelle Aktivierung jederzeit möglich</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>Datenschutz &amp; Sicherheit</h4>
+          <ul>
+            <li>Keine Bild- oder Videodaten</li>
+            <li>Ausschließlich abstrahierte Zustandsdaten</li>
+            <li>Orientierung an DSGVO-Anforderungen</li>
+            <li>Verschlüsselte Kommunikation, IEC 62443</li>
+            <li>Rollenbasierte Zugriffsrechte</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>Normen &amp; Richtlinien</h4>
+          <ul>
+            <li>DIN 14675 — Brandmeldeanlagen</li>
+            <li>DIN VDE 0833 — Gefahrenmeldeanlagen</li>
+            <li>DIN EN 50136 — Übertragungssicherheit</li>
+            <li>CE: RED, EMV-, Niederspannungsrichtlinie</li>
+            <li>DIN EN 60529 — Schutzarten</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section section--team" id="team">
+    <div class="section-inner">
+      <p class="section-eyebrow"><span class="nav-index">04</span>Team</p>
+      <h2 class="section-title">Vier Disziplinen, ein System.</h2>
+      <p class="section-lead">EvacEye entsteht an der Hochschule Schmalkalden, Fakultät Elektrotechnik, im Rahmen des Wettbewerbs COSIMA 2026, betreut durch Prof. Kramer und Prof. Roppel.</p>
+
+      <div class="team-grid">
+        <article class="team-card">
+          <span class="team-role-tag">Sensorik &amp; Softwareentwicklung</span>
+          <h3>Marius Weimann</h3>
+          <p class="team-tasks">Aufbau und Integration der Radar- und Thermalsensorik · Entwicklung der Software zur Sensordatenfusion</p>
+          <p class="team-exp">Erfahrung in Embedded Systems, PCB-Design und Sensorfusion als Dualstudent bei Ondal Medical Systems.</p>
+        </article>
+        <article class="team-card">
+          <span class="team-role-tag">Teamsprecher &amp; Projektmanagement</span>
+          <h3>Leonard Maletzke</h3>
+          <p class="team-tasks">Organisation und Koordination des Gesamtprojektes · Finanz-, Sponsoring- und Marketingkonzept</p>
+          <p class="team-exp">Erfahrung in Organisation und Finanzen als Vorsitz und Finanzverantwortlicher des Studierendenrates.</p>
+        </article>
+        <article class="team-card">
+          <span class="team-role-tag">Hardwareintegration &amp; Gehäuseentwicklung</span>
+          <h3>Karl Schwennicke Plata</h3>
+          <p class="team-tasks">Aufbau der Hardwarekomponenten · Konstruktion und Design von Gehäuse und Mechanik</p>
+          <p class="team-exp">Erfahrung im Aufbau und Design von LED-Systemen für spezifische Einsatzzwecke als Dualstudent bei iiM AG.</p>
+        </article>
+        <article class="team-card">
+          <span class="team-role-tag">Systemintegration &amp; Validierung</span>
+          <h3>Luis Marcus</h3>
+          <p class="team-tasks">Softwareentwicklung und Programmtests · Test, Validierung und Fehlerbehebung des Systems</p>
+          <p class="team-exp">Erfahrung in der Umsetzung technischer Anforderungen als Dualstudent bei X-FAB sowie projektbezogen als Mitglied der freiwilligen Feuerwehr.</p>
+        </article>
+      </div>
+
+      <div class="hochschule-strip">
+        <div>
+          <strong>Hochschule Schmalkalden</strong>
+          <span>Fakultät Elektrotechnik · Blechhammer 9 · 98574 Schmalkalden</span>
+        </div>
+        <div class="hochschule-badge">COSIMA 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section class="section section--kontakt" id="kontakt">
+    <div class="section-inner">
+      <p class="section-eyebrow"><span class="nav-index">05</span>Kontakt</p>
+      <h2 class="section-title">Fragen, Feedback oder Interesse an EvacEye?</h2>
+      <p class="section-lead">Ob Jury, Sponsor, Hochschule, Feuerwehr oder zukünftiger Anwender — wir freuen uns über jede Nachricht.</p>
+
+      <div class="kontakt-layout">
+        <form class="kontakt-form" id="kontaktForm" novalidate>
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="form-row">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-row">
+            <label for="rolle">Ich bin …</label>
+            <select id="rolle" name="rolle">
+              <option value="jury">Jury / COSIMA</option>
+              <option value="sponsor">Sponsor / Förderer</option>
+              <option value="hochschule">Hochschule / Forschung</option>
+              <option value="feuerwehr">Feuerwehr / Einsatzkraft</option>
+              <option value="kunde">Interessent / zukünftiger Kunde</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="nachricht">Nachricht</label>
+            <textarea id="nachricht" name="nachricht" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Nachricht senden</button>
+          <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="kontakt-info">
+          <div class="info-block">
+            <h3>Adresse</h3>
+            <p>Hochschule Schmalkalden<br>Fakultät Elektrotechnik<br>Blechhammer 9<br>98574 Schmalkalden</p>
+          </div>
+          <div class="info-block">
+            <h3>Betreuung</h3>
+            <p>Prof. Kramer<br>Prof. Roppel</p>
+          </div>
+          <div class="info-block">
+            <h3>Projekt</h3>
+            <p>Projektarbeit im Rahmen des Wettbewerbs COSIMA 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© <span id="year"></span> Team EvacEye — Hochschule Schmalkalden</span>
+    <a href="#start" class="back-to-top">Nach oben ↑</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
