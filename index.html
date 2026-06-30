@@ -135,7 +135,7 @@
     <div class="section-inner">
       <p class="section-eyebrow">Lösung</p>
       <h2 class="section-title">Eine Lageübersicht statt eines Rohdatenstroms.</h2>
-      <p class="section-lead">EvacEye verarbeitet Radar- und Thermaldaten direkt am Sensor und übergibt nur das, was im Einsatz zählt: klare Zustandsinformationen. Im Normalfall überwacht sich das System selbst im Hinterhrund — erst im Brandalarmfall schaltet das System in den Vollbetrieb und stellt die Lageübersicht.</p>
+      <p class="section-lead">EvacEye verarbeitet Radar- und Thermaldaten direkt am Sensor und übergibt nur das, was im Einsatz zählt: klare Zustandsinformationen. Im Normalfall überwacht sich das System im Hintergrund selbst — erst im Brandalarmfall schaltet das System in den Vollbetrieb und stellt die Lageübersicht.</p>
 
       <div class="loesung-layout">
         <div class="loesung-text">
@@ -166,7 +166,7 @@
               <li><span>Umgebungstemperatur</span><strong>34 °C</strong></li>
               <li><span>Status</span><strong class="status-flag">Priorität: hoch</strong></li>
             </ul>
-            <p class="room-detail-note">Entscheidungshilfe, keine Ersatzkontrolle — die finale Freigabe jedes Bereichs bleibt bei den Einsatzkräften vor Ort.</p>
+            <p class="room-detail-note">Entscheidungshilfe, keine Ersatzkontrolle — die Freigabe und Entscheidung bleibt bei den Rettungskräften vor Ort.</p>
           </div>
         </div>
       </div>
@@ -196,13 +196,13 @@
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">⬡</span>
           <h3>Sensordatenfusion</h3>
-          <p>Bewegungs- und Wärmemuster werden zeitlich und räumlich abgeglichen. Anwesenheit wird nur erkannt, wenn beide Sensorspuren plausibel zusammenpassen — das reduziert Fehlinterpretationen.</p>
+          <p>Radar- und Thermalsensordaten werden zeitlich und räumlich abgeglichen. Anwesenheit wird nur erkannt, wenn beide Sensordaten plausibel zusammenpassen — das reduziert Fehlinterpretationen.</p>
         </div>
         <div class="pipeline-connector" aria-hidden="true"></div>
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">⇄</span>
           <h3>Übertragung</h3>
-          <p>Zustandsdaten gehen per WLAN an die Servereinheit. Ein zweiter, unabhängiger LoRaWAN-Meshweg an Server und mobiles Endgerät sichert die Funktion auch bei Strom- oder WLAN-Ausfall.</p>
+          <p>Zustandsdaten gehen per WLAN an die Servereinheit. Ein zweiter, unabhängiger Mesh-Netz-Weg an das mobile Endgerät sichert die Funktion auch bei Strom- oder WLAN-Ausfall.</p>
         </div>
         <div class="pipeline-connector" aria-hidden="true"></div>
         <div class="pipeline-step" role="listitem">
