@@ -210,12 +210,15 @@ button { font-family: inherit; cursor: pointer; }
   border-color: var(--ink);
 }
 .btn--cosima:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+.btn--team,
 .btn--hochschule {
   background: transparent;
-  color: var(--text-mid);
-  border-color: var(--panel-line);
+  color: var(--ink);
+  border-color: var(--ink);
+  border-width: 1.5px;
 }
-.btn--hochschule:hover { border-color: var(--text-mid); color: var(--text-hi); transform: translateY(-1px); }
+.btn--team:hover,
+.btn--hochschule:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -259,7 +262,7 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-mono);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
-  color: var(--text-mid);
+  color: var(--text-hi);
   margin-bottom: 22px;
   text-transform: uppercase;
 }
@@ -288,12 +291,13 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-sub {
   font-size: 1.12rem;
-  color: var(--text-mid);
+  color: var(--text-hi);
   max-width: 600px;
   margin-bottom: 36px;
 }
 
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.hero-actions-row { display: flex; gap: 14px; flex-wrap: wrap; }
 
 /* ---------- Hero floorplan (signature element) ---------- */
 .hero-floorplan { position: relative; z-index: 1; }

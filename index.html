@@ -46,10 +46,14 @@
       <h1 class="hero-title">Im Rauch erkennen,<br>wo Personen sind.</h1>
       <p class="hero-sub">EvacEye erkennt mit Radar- und Thermalsensorik, in welchen Räumen sich im Brandfall noch Personen befinden — ganz ohne Kamera, ohne Bildaufnahme, ohne Identifikation. Einsatzkräfte erhalten so in Sekunden statt Minuten eine verlässliche Lageübersicht.</p>
       <div class="hero-actions">
-        <a href="#loesung" class="btn btn--primary">Funktionsweise ansehen</a>
-        <a href="#kontakt" class="btn btn--ghost">Mit dem Team sprechen</a>
-        <a href="https://www.cosima-mems.de/de" target="_blank" rel="noopener" class="btn btn--cosima">Zum Wettbewerb COSIMA</a>
-        <a href="https://www.hs-schmalkalden.de/hochschule/fakultaeten/fakultaet-elektrotechnik" target="_blank" rel="noopener" class="btn btn--hochschule">Hochschule Schmalkalden</a>
+        <div class="hero-actions-row">
+          <a href="#loesung" class="btn btn--primary">Funktionsweise ansehen</a>
+          <a href="https://www.cosima-mems.de/de" target="_blank" rel="noopener" class="btn btn--cosima">Zum Wettbewerb COSIMA</a>
+        </div>
+        <div class="hero-actions-row">
+          <a href="#team" class="btn btn--team">Team kennenlernen</a>
+          <a href="https://www.hs-schmalkalden.de/hochschule/fakultaeten/fakultaet-elektrotechnik" target="_blank" rel="noopener" class="btn btn--hochschule">Hochschule Schmalkalden</a>
+        </div>
       </div>
     </div>
 
@@ -173,37 +177,37 @@
     <div class="section-inner">
       <p class="section-eyebrow">Technik</p>
       <h2 class="section-title">Vom Sensorknoten bis zur Lageübersicht.</h2>
-      <p class="section-lead">Damit aus Rohsignalen am Ende eine einfache Aussage wie „Person erkannt“ wird, durchlaufen die Daten fünf Schritte. Jeder Raum hat dafür einen eigenen, unabhängig arbeitenden Sensorknoten — die folgende Übersicht zeigt, was darin passiert, von der ersten Messung bis zur fertigen Anzeige im Einsatzfall.</p>
+      <p class="section-lead">Jeder Raum wird durch einen eigenständigen Sensorknoten überwacht. Die Verarbeitung läuft mehrstufig — von der Rohsignalerfassung bis zur fertigen Zustandsinformation, die im Gebäudenetz ankommt.</p>
 
       <div class="pipeline" role="list">
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">▤</span>
-          <h3>1. Messen</h3>
-          <p>Der mmWave-Radar registriert Bewegung und sogar feinste Mikrobewegungen wie Atmung — auch bei Rauch oder Dunkelheit. Ein Thermalsensor misst parallel die Temperaturverteilung im Raum. Beide Werte zusammen sind die Grundlage für jede weitere Auswertung.</p>
+          <h3>Erfassung</h3>
+          <p>mmWave-Radar erkennt Bewegung, Entfernung und selbst feinste Mikrobewegungen wie Atmung — auch bei Rauch oder Dunkelheit. Ein Thermalsensor erfasst parallel die Wärmeverteilung im Raum.</p>
         </div>
         <div class="pipeline-connector" aria-hidden="true"></div>
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">∿</span>
-          <h3>2. Bereinigen</h3>
-          <p>Rohe Sensordaten enthalten Rauschen und kurze Ausreißer, etwa durch Luftzug oder Störsignale. Ein Raspberry Zero 2W direkt am Sensorknoten glättet diese Daten, damit später keine Fehlmessung fälschlich als Person interpretiert wird.</p>
+          <h3>Vorverarbeitung</h3>
+          <p>Ein Raspberry Zero 2W filtert und glättet die Rohdaten direkt am Sensorknoten, um Messrauschen und kurzzeitige Fehlmessungen zu reduzieren.</p>
         </div>
         <div class="pipeline-connector" aria-hidden="true"></div>
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">⬡</span>
-          <h3>3. Zusammenführen</h3>
-          <p>Bewegungs- und Wärmemuster werden miteinander abgeglichen: Nur wenn beide Sensoren zeitlich und räumlich zusammenpassen, gilt eine Person als erkannt. Diese doppelte Bestätigung verhindert, dass einzelne Sensoren allein eine Fehlmeldung auslösen.</p>
+          <h3>Sensordatenfusion</h3>
+          <p>Bewegungs- und Wärmemuster werden zeitlich und räumlich abgeglichen. Anwesenheit wird nur erkannt, wenn beide Sensorspuren plausibel zusammenpassen — das reduziert Fehlinterpretationen.</p>
         </div>
         <div class="pipeline-connector" aria-hidden="true"></div>
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">⇄</span>
-          <h3>4. Übertragen</h3>
-          <p>Statt Rohdaten verlässt nur eine kompakte Zustandsmeldung den Sensorknoten. Sie geht per WLAN an die Servereinheit und zusätzlich über einen zweiten, unabhängigen Funkweg direkt an Server und mobiles Endgerät — damit das System auch bei Strom- oder WLAN-Ausfall weiterläuft.</p>
+          <h3>Übertragung</h3>
+          <p>Zustandsdaten gehen per WLAN an die Servereinheit. Ein zweiter, unabhängiger LoRaWAN-Meshweg an Server und mobiles Endgerät sichert die Funktion auch bei Strom- oder WLAN-Ausfall.</p>
         </div>
         <div class="pipeline-connector" aria-hidden="true"></div>
         <div class="pipeline-step" role="listitem">
           <span class="pipeline-icon" aria-hidden="true">▣</span>
-          <h3>5. Anzeigen</h3>
-          <p>Server und mobiles Endgerät führen die Meldungen aller Räume zu einer gebäudeweiten Lageübersicht zusammen. Einsatzkräfte sehen so in Echtzeit, identisch auf Web und Tablet, welche Räume Aufmerksamkeit brauchen.</p>
+          <h3>Lageübersicht</h3>
+          <p>Server und mobiles Endgerät führen alle Räume zur gebäudeweiten Echtzeit-Ansicht zusammen — identisch auf Web und Tablet.</p>
         </div>
       </div>
 
@@ -235,7 +239,7 @@
             <li>Keine Bild- oder Videodaten</li>
             <li>Ausschließlich abstrahierte Zustandsdaten</li>
             <li>Orientierung an DSGVO-Anforderungen</li>
-            <li>Verschlüsselte Kommunikation, IEC 62443</li>
+            <li>Verschlüsselte Kommunikation</li>
             <li>Rollenbasierte Zugriffsrechte</li>
           </ul>
         </div>
