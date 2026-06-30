@@ -16,8 +16,8 @@
   --panel: #FFFFFF;            /* Karten-Hintergrund */
   --panel-line: rgba(34, 26, 20, 0.1);
   --text-hi: #221A14;
-  --text-mid: #6B5B4D;
-  --text-low: #9A8A7A;
+  --text-mid: #4A3C30;
+  --text-low: #6B5B4D;
   --signal-occupied: #FF7A33;   /* Person erkannt — Hauptakzent Orange */
   --signal-hot: #E8491F;        /* Person + Hitze, kräftigeres Orange-Rot */
   --signal-clear: #D9CBB8;      /* kein Befund, neutral warm */
@@ -210,6 +210,12 @@ button { font-family: inherit; cursor: pointer; }
   border-color: var(--ink);
 }
 .btn--cosima:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+.btn--hochschule {
+  background: transparent;
+  color: var(--text-mid);
+  border-color: var(--panel-line);
+}
+.btn--hochschule:hover { border-color: var(--text-mid); color: var(--text-hi); transform: translateY(-1px); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -412,10 +418,10 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center;
 }
 .section-title {
-  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
   font-weight: 700;
   max-width: 760px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 .section-lead {
   font-size: 1.08rem;
