@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://evaceye.de/sitemap.xml
- 
+Sitemap: https://evaceye.de/sitemap.xml 
