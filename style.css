@@ -431,8 +431,9 @@ button { font-family: inherit; cursor: pointer; }
   background: #000;
 }
 .video-wrap--hero {
-  max-width: 640px;
-  margin-top: 36px;
+  max-width: none;
+  margin-top: 0;
+  border-radius: 10px;
 }
 .video-wrap iframe {
   position: absolute;
@@ -440,6 +441,43 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.video-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  padding: 18px;
+  max-width: 640px;
+  margin-top: 36px;
+  box-shadow: 0 30px 60px -30px rgba(34, 26, 20, 0.25);
+}
+.video-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.video-card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.video-card-event {
+  color: var(--text-low);
+}
+.video-card-caption {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  line-height: 1.5;
 }
 
 .section-inner { max-width: var(--maxw); margin: 0 auto; }
