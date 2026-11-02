@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EvacEye — Sensorbasierte Anwesenheitserkennung im Brandfall</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+<meta name="description" content="Sensorbasiertes Assistenzsystem zur Erkennung der Anwesenheit von Personen innerhalb eines Gebäudes zur Unterstützung der Evakuierungsmaßnahmen von Rettungskräften im Brandfall.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://evaceye.de/">
+<meta property="og:title" content="EvacEye — No life unseen.">
+<meta property="og:description" content="Sensorbasiertes Assistenzsystem zur Erkennung der Anwesenheit von Personen innerhalb eines Gebäudes zur Unterstützung der Evakuierungsmaßnahmen von Rettungskräften im Brandfall.">
+<meta property="og:image" content="https://evaceye.de/assets/logo.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scan-progress" id="scanProgress" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#start" class="brand">
+      <img src="assets/logo-icon.png" alt="" class="brand-icon">
+      <span class="brand-word"><span class="brand-word-evac">Evac</span><span class="brand-word-eye">Eye</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#loesung">Lösung</a>
+      <a href="#technik">Funktionsweise</a>
+      <a href="#messe">Messe</a>
+      <a href="#team">Team</a>
+      <a href="#sponsoren">Sponsoren</a>
+    </nav>
+    <a href="#kontakt" class="btn btn--cosima-small">Kontakt</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="start">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Startseite">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="assets/hero-bg.png" alt="" class="hero-bg-img">
+      <div class="hero-bg-fade"></div>
+    </div>
+    <div class="hero-inner">
+      <a href="#messe" class="announce">
+        <span class="announce-tag">Live</span>
+        <span>12.–13. November 2026 · COSIMA 2026 auf der Electronica in München</span>
+        <span class="announce-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="eyebrow"><span class="dot dot--occupied"></span>No life unseen.</p>
+      <h1 class="hero-title">Im Rauch erkennen,<br>wo Personen sind.</h1>
+      <p class="hero-sub">Sensorbasiertes Assistenzsystem zur Erkennung der Anwesenheit von Personen innerhalb eines Gebäudes zur Unterstützung der Evakuierungsmaßnahmen von Rettungskräften im Brandfall — ohne Bildaufnahmen oder personenbezogene Daten.</p>
+      <div class="hero-actions">
+        <div class="hero-actions-row">
+          <a href="#kontakt" class="btn btn--primary">Kontakt aufnehmen</a>
+          <a href="#loesung" class="btn btn--cosima">So funktioniert EvacEye</a>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-card-head">
+          <span class="video-card-eyebrow"><span class="dot dot--occupied"></span>Vortrag</span>
+          <span class="video-card-event">E-Science-Day 2026 · Hochschule Schmalkalden</span>
+        </div>
+        <div class="video-wrap video-wrap--hero">
+          <div class="video-consent" id="videoConsent" data-video-id="sJlP3NGSkGA" data-video-title="EvacEye Vortrag beim E-Science-Day 2026">
+            <button type="button" class="video-play" id="videoPlay" aria-label="Video laden und abspielen">
+              <span class="video-play-icon" aria-hidden="true">▶</span>
+            </button>
+            <p class="video-consent-text">Mit dem Klick wird das Video von YouTube geladen. Dabei werden Daten an Google übertragen. Mehr dazu in der <a href="datenschutz.html#youtube">Datenschutzerklärung</a>.</p>
+          </div>
+        </div>
+        <p class="video-card-caption">Unser Vortrag zu EvacEye beim E-Science-Day 2026 der Fakultät Elektrotechnik.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="section section--problem" id="problem">
+    <div class="section-inner">
+      <p class="section-eyebrow">Die Herausforderung</p>
+      <h2 class="section-title">Im Ernstfall zählt jede Sekunde — und viele Informationen fehlen.</h2>
+      <p class="section-lead">Brände in Gebäuden stellen Rettungskräfte vor eine hochdynamische und zeitkritische Entscheidungssituation. Insbesondere in größeren, komplexen oder stark frequentierten Gebäuden ist zu Beginn eines Einsatzes häufig unklar, ob und in welchen Bereichen sich noch Personen befinden.</p>
+      <p class="section-lead section-lead--follow">Rauchentwicklung, Dunkelheit und Hitze erschweren die Lageerkundung erheblich, sodass Räume manuell und systematisch durchsucht werden müssen. Das kostet wertvolle Zeit und setzt sowohl eingeschlossene Personen als auch Rettungskräfte zusätzlichen Risiken aus. Bestehende Technik schließt diese Informationslücke nicht.</p>
+
+      <div class="problem-grid">
+        <article class="problem-card">
+          <h3>Brandmeldeanlagen</h3>
+          <p>Liefern Informationen über Rauchentwicklung, Temperaturanstieg oder ausgelöste Melder, jedoch keine Aussage darüber, ob sich noch Menschen in einzelnen Räumen aufhalten.</p>
+        </article>
+        <article class="problem-card">
+          <h3>Kamerasysteme</h3>
+          <p>Rauch und Dunkelheit beeinträchtigen die Bildauswertung. Optische Überwachung stößt auf erhebliche datenschutzrechtliche und gesellschaftliche Akzeptanzprobleme.</p>
+        </article>
+        <article class="problem-card">
+          <h3>Manuelle Suche</h3>
+          <p>Räume müssen manuell und systematisch durchsucht werden. Das kostet wertvolle Zeit und setzt eingeschlossene Personen wie Rettungskräfte zusätzlichen Risiken aus.</p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <p>Rettungskräfte benötigen keine personenbezogene Identifikation, sondern eine schnelle und verlässliche Entscheidungshilfe: <strong>In welchen Räumen befinden sich mit hoher Wahrscheinlichkeit noch Personen, und welche Bereiche sollten bei der Evakuierung priorisiert werden?</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUKT ============ -->
+  <section class="section section--loesung" id="loesung">
+    <div class="section-inner">
+      <p class="section-eyebrow">Lösung und Konzept</p>
+      <h2 class="section-title">Zwei Sensoren in jedem Raum.</h2>
+      <p class="section-lead">EvacEye ist ein sensorbasiertes Assistenzsystem, das Rettungskräften im Brandfall anzeigt, in welchen Räumen eines Gebäudes sich mit hoher Wahrscheinlichkeit noch Personen befinden. Die Lösung basiert auf autonomen Sensorknoten in jedem Raum, die einen Radarsensor und einen Infrarot-Thermalsensor als kompakte Mikrosysteme kombinieren.</p>
+
+      <div class="sensor-grid">
+        <article class="sensor-card">
+          <span class="sensor-tag">1 · Radar-Sensor</span>
+          <h3>Erkennt Bewegungen</h3>
+          <p>Auch kleinste, wie das Atmen einer bewusstlosen Person — auch bei Rauch, Hitze oder Dunkelheit.</p>
+        </article>
+        <article class="sensor-card">
+          <span class="sensor-tag">2 · Thermal-Sensor</span>
+          <h3>Erkennt Wärmequellen</h3>
+          <p>Unterstützt den Radar bei der Erkennung der Anwesenheit einer Person und gibt Hinweise auf den Raumzustand durch die Erkennung von Hitzequellen.</p>
+        </article>
+        <article class="sensor-card">
+          <span class="sensor-tag">3 · Lageübersicht</span>
+          <h3>Lageübersicht für Rettungskräfte</h3>
+          <p>Kombiniert die Sensordaten und zeigt, in welchen Räumen sich Personen aufhalten und wo erhöhte Temperaturen vorliegen.</p>
+        </article>
+      </div>
+
+      <h3 class="sub-title">Die Lageübersicht für Rettungskräfte</h3>
+      <p class="section-lead">Im Alltag arbeitet EvacEye unbemerkt im Hintergrund. Löst die Brandmeldeanlage aus oder wird EvacEye manuell aktiviert, erscheint die Einsatzoberfläche automatisch in der webbasierten Anwendung und auf dem mobilen Endgerät.</p>
+
+      <figure class="figure figure--hero">
+        <img src="assets/benutzeroberflaeche.jpg" alt="Beispielansicht der EvacEye-Benutzeroberfläche auf einem Tablet mit Stockwerksnavigation, Gebäudegrundriss und Rauminformationen." loading="lazy" width="1438" height="799">
+        <figcaption>Beispielansicht der Benutzeroberfläche</figcaption>
+      </figure>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Stockwerksnavigation</h3>
+          <p>Stockwerke, in denen mindestens eine Person erkannt wurde, werden orangefarben hervorgehoben.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Gebäudegrundriss</h3>
+          <p>Jeder überwachte Raum wird an seiner tatsächlichen Position dargestellt — mit wenigen, eindeutig verständlichen Symbolen für die Informationsaufnahme unter Stressbedingungen.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Mobile Einsatzlösung</h3>
+          <p>Ein Tablet in der Feuerwehr-Informationszentrale (FIZ) am Gebäudeeingang zeigt die Lageübersicht auch dann, wenn Servereinheit oder Gebäudenetzwerk ausgefallen sind.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Datenschutz</h3>
+          <p>EvacEye verarbeitet keine Bilddaten, Videoaufzeichnungen oder personenbezogenen Identifikationsmerkmale.</p>
+        </article>
+      </div>
+
+      <div class="usecase">
+        <div class="usecase-text">
+          <h3>Zielgruppen</h3>
+          <p>EvacEye ersetzt keine Brandmeldeanlage, sondern ergänzt diese. Jeder Raum wird mit einem unauffälligen Sensorknoten ausgestattet, der an der Decke montiert wird. EvacEye ist nachrüstbar und lässt sich vom einzelnen Raum bis hin zu kompletten Gebäudestrukturen erweitern.</p>
+        </div>
+        <ul class="chip-list" aria-label="Zielgruppen">
+          <li>Schulen</li>
+          <li>Hochschulen</li>
+          <li>Pflegeeinrichtungen</li>
+          <li>Krankenhäuser</li>
+          <li>Bürogebäude</li>
+          <li>Industrieanlagen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FUNKTIONSWEISE ============ -->
+  <section class="section section--technik" id="technik">
+    <div class="section-inner">
+      <p class="section-eyebrow">Funktionsweise</p>
+      <h2 class="section-title">In vier Schritten zur Lageübersicht.</h2>
+
+      <div class="pipeline" role="list">
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">▤</span>
+          <h3>Erfassen</h3>
+          <p>Der Radarsensor erkennt Personen auch bei Dunkelheit und Rauch, selbst kleine Atem- oder Körperbewegungen. Der Thermalsensor erfasst die Temperaturverteilung im Raum.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">⬡</span>
+          <h3>Auswerten</h3>
+          <p>Jeder Sensorknoten wertet die Sensordaten lokal aus und überträgt ausschließlich abstrahierte Zustandsinformationen.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">⇄</span>
+          <h3>Übertragen</h3>
+          <p>Über ein eigenes Mesh-Netz, das unabhängig vom Gebäudenetzwerk arbeitet. Ein Akku übernimmt bei Stromausfall die Notstromversorgung.</p>
+        </div>
+        <div class="pipeline-connector" aria-hidden="true"></div>
+        <div class="pipeline-step" role="listitem">
+          <span class="pipeline-icon" aria-hidden="true">▣</span>
+          <h3>Anzeigen</h3>
+          <p>Nach einem Alarm der Brandmeldeanlage zeigen Servereinheit und Tablet die Lageübersicht auf Basis der Gebäudegrundrisse.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--cta">
+        <p><strong>Sie sind Errichterfirma für Brandmeldetechnik oder Gebäudebetreiber?</strong> Wir stellen Ihnen EvacEye gern persönlich vor.</p>
+        <a href="#kontakt" class="btn btn--primary" data-rolle="errichter">Gespräch vereinbaren</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MESSE ============ -->
+  <section class="section section--messe" id="messe">
+    <div class="section-inner">
+      <div class="messe-layout messe-layout--single">
+        <div>
+          <p class="section-eyebrow section-eyebrow--light">Messe</p>
+          <h2 class="section-title section-title--light">EvacEye live auf der Electronica in München.</h2>
+          <p class="section-lead section-lead--light">Im Rahmen des Wettbewerbs COSIMA 2026 stellen wir EvacEye mit einem Demonstrator aus mehreren baugleichen Prototypen vor. Besuchen Sie uns — wir freuen uns auf den Austausch.</p>
+          <div class="messe-facts">
+            <div><span class="messe-fact-label">Wann</span><span class="messe-fact-value">12.–13. November 2026</span></div>
+            <div><span class="messe-fact-label">Wo</span><span class="messe-fact-value">Electronica · München</span></div>
+          </div>
+          <div class="messe-actions">
+            <a href="#kontakt" class="btn btn--primary">Treffen auf der Messe anfragen</a>
+            <a href="https://www.cosima-mems.de/de" target="_blank" rel="noopener" class="btn btn--light">Zum Wettbewerb COSIMA ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section section--team" id="team">
+    <div class="section-inner">
+      <p class="section-eyebrow">Team</p>
+      <h2 class="section-title">Team EvacEye</h2>
+      <p class="section-lead">Hinter EvacEye steht ein vierköpfiges Team der Fakultät Elektrotechnik der Hochschule Schmalkalden, das Erfahrungen aus Sensorik, Hardwareentwicklung, Systemintegration, Projektorganisation und dem Feuerwehrdienst vereint. Betreut durch Prof. Kramer und Prof. Roppel.</p>
+
+      <div class="team-grid">
+        <article class="team-card">
+          <img src="assets/team/weimann.jpg" alt="Porträt von Marius Weimann" class="team-photo" width="220" height="220" loading="lazy">
+          <div>
+            <h3>Marius Weimann</h3>
+            <span class="team-role-tag">Sensorik &amp; Softwareentwicklung</span>
+            <p class="team-tasks">Aufbau und Integration der Radar- und Thermalsensorik, Entwicklung der Software zur Sensordatenfusion</p>
+          </div>
+        </article>
+        <article class="team-card">
+          <img src="assets/team/maletzke.jpg" alt="Porträt von Leonard Maletzke" class="team-photo" width="220" height="220" loading="lazy">
+          <div>
+            <h3>Leonard Maletzke</h3>
+            <span class="team-role-tag">Projektleitung &amp; Teamsprecher</span>
+            <p class="team-tasks">Organisation und Koordination des Gesamtprojektes, Erstellung des Finanz-, Sponsoring- und Marketingkonzeptes</p>
+          </div>
+        </article>
+        <article class="team-card">
+          <img src="assets/team/schwennicke.jpg" alt="Porträt von Karl Schwennicke Plata" class="team-photo" width="220" height="220" loading="lazy">
+          <div>
+            <h3>Karl Schwennicke Plata</h3>
+            <span class="team-role-tag">Hardwareintegration &amp; Gehäuseentwicklung</span>
+            <p class="team-tasks">Aufbau der Hardwarekomponenten, Konstruktion und Design des Gehäuses und der Mechanik</p>
+          </div>
+        </article>
+        <article class="team-card">
+          <img src="assets/team/marcus.jpg" alt="Porträt von Luis Marcus" class="team-photo" width="220" height="220" loading="lazy">
+          <div>
+            <h3>Luis Marcus</h3>
+            <span class="team-role-tag">Systemintegration &amp; Validierung</span>
+            <p class="team-tasks">Softwareentwicklung und Programmtests, Test, Validierung und Fehlerbehebung des Systems</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="hochschule-strip">
+        <img src="assets/hochschule-schmalkalden.svg" alt="Logo Hochschule Schmalkalden" class="hochschule-logo" loading="lazy">
+        <div class="hochschule-text">
+          <strong>Hochschule Schmalkalden</strong>
+          <span>Fakultät Elektrotechnik · Blechhammer 9 · 98574 Schmalkalden</span>
+        </div>
+        <a href="https://www.hs-schmalkalden.de/hochschule/fakultaeten/fakultaet-elektrotechnik" target="_blank" rel="noopener" class="hochschule-badge">Fakultät Elektrotechnik ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPONSOREN ============ -->
+  <section class="section section--sponsoren" id="sponsoren">
+    <div class="section-inner">
+      <p class="section-eyebrow">Sponsoren</p>
+      <h2 class="section-title">Möglich gemacht durch starke Partner.</h2>
+
+      <div class="sponsor-grid">
+        <article class="sponsor-card">
+          <div class="sponsor-logo"><img src="assets/sponsors/cosacom.svg" alt="Logo COSACOM Kommunikationsanlagen GmbH" loading="lazy"></div>
+          <h3>COSACOM Kommunikationsanlagen GmbH</h3>
+          <p>Errichter- und Wartungsunternehmen aus Erfurt, spezialisiert auf Brandmelde-, Einbruchmelde- und Videoanlagen. Als unser technischer Experte für die Installation solcher Systeme begleitet COSACOM EvacEye mit Erfahrung aus der Praxis.</p>
+          <a href="https://cosacom.de/" target="_blank" rel="noopener" class="btn btn--sponsor">Zur Website von COSACOM <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="sponsor-card">
+          <div class="sponsor-logo"><img src="assets/sponsors/xfab.svg" alt="Logo X-FAB" loading="lazy"></div>
+          <h3>X-FAB</h3>
+          <p>Halbleiter-Foundry aus Erfurt, spezialisiert auf Analog-/Mixed-Signal-Chips und MEMS.</p>
+          <a href="https://www.xfab.com/" target="_blank" rel="noopener" class="btn btn--sponsor">Zur Website von X-FAB <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="sponsor-card">
+          <div class="sponsor-logo"><img src="assets/sponsors/iim.svg" alt="Logo iiM AG" loading="lazy"></div>
+          <h3>iiM AG</h3>
+          <p>Ingenieurunternehmen aus Suhl, spezialisiert auf optische Messtechnik und Beleuchtung für die industrielle Bildverarbeitung.</p>
+          <a href="https://www.iim-ag.com/" target="_blank" rel="noopener" class="btn btn--sponsor">Zur Website der iiM AG <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="sponsor-card">
+          <div class="sponsor-logo"><img src="assets/sponsors/melexis.png" alt="Logo Melexis" loading="lazy"></div>
+          <h3>Melexis</h3>
+          <p>Halbleiterunternehmen aus Belgien, spezialisiert auf Sensorchips für die Automobilindustrie.</p>
+          <a href="https://www.melexis.com/" target="_blank" rel="noopener" class="btn btn--sponsor">Zur Website von Melexis <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="sponsor-card sponsor-card--wide">
+          <div class="sponsor-logo sponsor-logo--stack"><img src="assets/sponsors/vde.svg" alt="Logo VDE" loading="lazy"><img src="assets/sponsors/cosima.svg" alt="Logo COSIMA" loading="lazy"></div>
+          <div class="sponsor-wide-body">
+            <h3>VDE Verband der Elektrotechnik Elektronik Informationstechnik</h3>
+            <p>Eine der größten Technologie-Organisationen Europas und Veranstalter des studentischen Wettbewerbs COSIMA.</p>
+            <div class="sponsor-actions">
+              <a href="https://www.vde.com/" target="_blank" rel="noopener" class="btn btn--sponsor">Zur Website des VDE <span aria-hidden="true">↗</span></a>
+              <a href="https://www.cosima-mems.de/de" target="_blank" rel="noopener" class="btn btn--sponsor btn--sponsor-ghost">Zum Wettbewerb COSIMA <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="sponsor-cta">
+        <p>Sie möchten EvacEye ebenfalls unterstützen?</p>
+        <a href="#kontakt" class="btn btn--primary" data-rolle="sponsor">Sponsor werden</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section class="section section--kontakt" id="kontakt">
+    <div class="section-inner">
+      <p class="section-eyebrow">Kontakt</p>
+      <h2 class="section-title">Interesse an EvacEye? Schreiben Sie uns.</h2>
+      <p class="section-lead">Ob Gebäudebetreiber, Errichterfirma, Feuerwehr oder Sponsor — wir freuen uns auf Ihre Nachricht und melden uns schnellstmöglich zurück.</p>
+
+      <div class="kontakt-layout">
+        <form class="kontakt-form" id="kontaktForm" action="https://formspree.io/f/xnjkvlob" method="POST" novalidate>
+          <input type="hidden" name="_subject" id="formSubject" value="Kontaktanfrage über die EvacEye-Website">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="form-row">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="_replyto" required autocomplete="email">
+          </div>
+          <div class="form-row">
+            <label for="rolle">Ich bin …</label>
+            <select id="rolle" name="rolle">
+              <option value="kunde">Gebäudebetreiber / Interessent</option>
+              <option value="errichter">Errichterfirma / Brandmeldetechnik</option>
+              <option value="feuerwehr">Feuerwehr / Rettungskraft</option>
+              <option value="sponsor">Sponsor / Partner</option>
+              <option value="jury">Jury / COSIMA</option>
+              <option value="hochschule">Hochschule / Forschung</option>
+              <option value="presse">Presse</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="nachricht">Nachricht</label>
+            <textarea id="nachricht" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block" id="formSubmitBtn">Nachricht senden</button>
+          <p class="form-privacy">Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Hinweise zur Verarbeitung finden Sie in der <a href="datenschutz.html#kontaktformular">Datenschutzerklärung</a>.</p>
+          <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="kontakt-info">
+          <div class="info-block">
+            <h3>E-Mail</h3>
+            <p><a href="mailto:evaceye@hs-schmalkalden.de" class="email-link">evaceye@hs-schmalkalden.de</a></p>
+          </div>
+          <div class="info-block">
+            <h3>Folgen Sie uns</h3>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/company/evaceye/" target="_blank" rel="noopener" class="social-link">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://www.instagram.com/evaceye/" target="_blank" rel="noopener" class="social-link">Instagram <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="info-block">
+            <h3>Persönlich</h3>
+            <p>12.–13. November 2026<br>Electronica · München</p>
+          </div>
+          <div class="info-block">
+            <h3>Adresse</h3>
+            <p>Hochschule Schmalkalden<br>Fakultät Elektrotechnik<br>Blechhammer 9<br>98574 Schmalkalden</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© <span id="year"></span> Team EvacEye — Hochschule Schmalkalden</span>
+    <nav class="footer-links" aria-label="Weitere Links">
+      <a href="https://www.linkedin.com/company/evaceye/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/evaceye/" target="_blank" rel="noopener">Instagram</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="#start" class="back-to-top">Nach oben ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
