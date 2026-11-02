@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll-Reveal für Karten und Sektionsinhalte ---------- */
   const revealTargets = document.querySelectorAll(
-    '.problem-card, .feature-row, .pipeline-step, .spec-card, .team-card, .callout, .room-detail-card'
+    '.problem-card, .feature-row, .pipeline-step, .spec-card, .team-card, .callout, .room-detail-card, .safety-card, .feature-card, .sensor-card, .sponsor-card, .demo-steps li, .stat, .figure, .usecase'
   );
   revealTargets.forEach((el) => el.classList.add('reveal'));
 
@@ -104,6 +104,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ---------- Video erst nach Klick von YouTube laden ---------- */
+  const videoConsent = document.getElementById('videoConsent');
+  const videoPlay = document.getElementById('videoPlay');
+  if (videoConsent && videoPlay) {
+    videoPlay.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoConsent.dataset.videoId}?autoplay=1`;
+      iframe.title = videoConsent.dataset.videoTitle;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      videoConsent.replaceWith(iframe);
+    });
+  }
+
+  /* ---------- Sponsoren-CTA: Rolle im Formular vorauswählen ---------- */
+  document.querySelectorAll('a[data-rolle]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const select = document.getElementById('rolle');
+      if (select) select.value = link.dataset.rolle;
+    });
+  });
+
   /* ----------------------------------------------------------------
      Kontaktformular
      GitHub Pages liefert nur statische Dateien aus, es gibt also
@@ -121,10 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ROLLEN_LABEL = {
     jury: 'Jury / COSIMA',
-    sponsor: 'Sponsor / Förderer',
+    sponsor: 'Sponsor / Partner',
     hochschule: 'Hochschule / Forschung',
-    feuerwehr: 'Feuerwehr / Einsatzkraft',
-    kunde: 'Interessent / zukünftiger Kunde',
+    feuerwehr: 'Feuerwehr / Rettungskraft',
+    errichter: 'Errichterfirma / Brandmeldetechnik',
+    presse: 'Presse',
+    kunde: 'Gebäudebetreiber / Interessent',
     sonstiges: 'Sonstiges'
   };
 
